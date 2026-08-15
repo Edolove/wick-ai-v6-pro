@@ -1,0 +1,19 @@
+export function voteEngine(c){
+let call=0,put=0;
+
+if(c.fvgBull) call+=20;
+if(c.bvgBear) put+=20;
+if(c.retestBull) call+=15;
+if(c.retestBear) put+=15;
+if(c.sweepBull) call+=18;
+if(c.sweepBear) put+=18;
+if(c.emaBull) call+=12;
+if(c.emaBear) put+=12;
+if(c.hhhl) call+=10;
+if(c.lhll) put+=10;
+if(c.range){call-=20;put-=20;}
+
+const total=Math.max(call,put);
+if(total<85) return{dir:"WAIT",score:total};
+return call>put?{dir:"CALL",score:call}:{dir:"PUT",score:put};
+}
