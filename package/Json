@@ -1,0 +1,10 @@
+{
+  "name": "wick-ai-v6-pro",
+  "private": true,
+  "version": "6.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "start": "vite preview"
+  }
+}
