@@ -1,19 +1,19 @@
-import { connectBinance } from "./market.js";
+import { createAnalyzer } from "../core/engine.js";
 
-export function createAnalyzer(){
+const engine = createAnalyzer();
 
-    let socket=null;
+const startBtn = document.getElementById("start");
+const status = document.getElementById("status");
 
-    return{
+startBtn.onclick = () => {
+  status.textContent = "Connexion...";
+  engine.start("BTCUSDT", "1m");
+  status.textContent = "Observation";
+};
 
-        start(symbol,tf){
-
-            socket=connectBinance(symbol,tf);
-
-            document.getElementById("status").innerText="Observation";
-
-        }
-
-    };
-
-}
+setInterval(() => {
+  const d = engine.getDecision();
+  if (d) {
+    status.textContent = `${d.dir} ${d.score}%`;
+  }
+}, 250);
